@@ -4,6 +4,9 @@ import cPickle as pickle
 import numpy as np
 import tensorflow as tf
 
+from sys import getsizeof
+import pdb
+
 
 def _read_data(data_path, train_files):
   """Reads CIFAR-10 format data. Always returns NHWC format.
@@ -63,6 +66,8 @@ def read_data(data_path, num_valids=5000):
   mean = np.mean(images["train"], axis=(0, 1, 2), keepdims=True)
   std = np.std(images["train"], axis=(0, 1, 2), keepdims=True)
 
+  pdb.set_trace()
+
   print "mean: {}".format(np.reshape(mean * 255.0, [-1]))
   print "std: {}".format(np.reshape(std * 255.0, [-1]))
 
@@ -70,6 +75,7 @@ def read_data(data_path, num_valids=5000):
   if num_valids:
     images["valid"] = (images["valid"] - mean) / std
   images["test"] = (images["test"] - mean) / std
+
 
   return images, labels
 
